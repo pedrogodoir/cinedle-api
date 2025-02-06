@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -8,11 +8,10 @@ export default function Home() {
         <h1 className="font-semibold text-7xl bg-clip-text bg-gradient-to-b from-zinc-900 to-zinc-50 text-transparent">dle</h1>
       </div>
       
-      <div className="flex flex-col justify-center items-center h-screen">
-          <Link href={"/classic"} 
-            className="transition duration-1000 flex items-center justify-center w-96 h-[72px] rounded-full bg-gradient-to-b from-red-600 to-red-900 hover:bg-gradient-to-b hover:from-red-900 hover:to-red-600">
-            <h2 className="font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-50 to-zinc-300 text-transparent">Classic</h2>
-          </Link>
+      <div className="flex flex-col justify-center items-center h-screen gap-5">
+          <Button variant="red" href="/classic">Classic</Button>
+
+          <Button variant="disabled">Artwork</Button>
       </div>
 
       <div className="absolute inset-0 bg-no-repeat z-[-1]" 
