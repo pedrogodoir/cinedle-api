@@ -7,7 +7,7 @@ export default function Home() {
       <Header/>
       
       <div className="flex flex-col justify-center items-center h-screen gap-5">
-          <Button variant="red" href="/classic">Classic</Button>
+          <Button variant="red" href="/classic" id="bclassic">Classic</Button>
 
           <Button variant="disabled">Artwork</Button>
       </div>
