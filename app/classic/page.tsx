@@ -1,18 +1,13 @@
-import { Dropdown, DropdownItem } from "@/components/ui/dropdown";
+import { Dropdown, DropdownItem, DropdownLink } from "@/components/ui/dropdown";
 import { Header } from "@/components/ui/header";
 
 export default function Classic() {
   return (
     <div className="flex flex-col justify-between items-center p-10 h-screen">
       <Header variant="red">
-        <Dropdown
-          trigger={
-            <span className="flex items-center gap-1">
-              <h1 className="font-semibold text-7xl bg-clip-text bg-gradient-to-b from-red-900 to-red-600 text-transparent">Classic</h1>
-            </span>
-          }
-        >
-          <DropdownItem className="font-semibold text-4xl bg-clip-text bg-gradient-to-b from-sky-900 to-sky-600 text-transparent">Artwork</DropdownItem>
+        <Dropdown variant="red" trigger="Classic">
+          <DropdownItem variant="blue">Artwork</DropdownItem>
+          <DropdownLink variant="disabled" href="">Artwork</DropdownLink>
         </Dropdown>
       </Header>
       
