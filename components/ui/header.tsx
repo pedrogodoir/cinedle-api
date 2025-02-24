@@ -2,15 +2,17 @@ import { EllipsisVertical } from "lucide-react"
 import Link from "next/link"
 import * as React from "react"
 import { Dropdown, DropdownItem } from "./dropdown"
+import { Modal } from "./modal"
 
-interface HeaderProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
+interface HeaderProps {
   variant?: "default" | "red" | "blue",
   href?: string,
+  children: React.ReactNode,
+  className: React.ReactNode
 }
 
 const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
   ({children, className = "", variant = "default", href = "", ...props }, ref) => {
-    const baseStyles = "flex items-center justify-center rounded-full bg-black"
 
     const variants = {
       default: "",
@@ -23,13 +25,7 @@ const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
     return (
         <div>
             <div className="flex flex-row justify-between items-center gap-4">
-                <div className="h-full">
-                    <EllipsisVertical color="white" size={50} className="cursor-pointer"></EllipsisVertical>
-                </div>
-
-                <div className="flex flex-row">
-                    {children}
-                </div> 
+              {children}
             </div>
         </div>
     )
