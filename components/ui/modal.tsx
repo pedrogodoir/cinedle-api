@@ -2,16 +2,19 @@
 
 import * as React from "react"
 import { X } from "lucide-react"
+import { Button } from "./button"
+import { Title } from "./title"
 
 interface ModalProps {
-  isOpen: boolean
+  color: "disabled" | "default" | "red",
+  isOpen: boolean,
   onClose: () => void
   title?: string
   children: React.ReactNode
   className?: string
 }
 
-export function Modal({ isOpen, onClose, title, children, className = "" }: ModalProps) {
+export function Modal({ isOpen, onClose, title, children, className = "", color = "default" }: ModalProps) {
   // Ref para o conteúdo do modal
   const modalRef = React.useRef<HTMLDivElement>(null)
 
@@ -50,18 +53,14 @@ export function Modal({ isOpen, onClose, title, children, className = "" }: Moda
     >
       <div
         ref={modalRef}
-        className={`bg-white rounded-lg shadow-xl max-w-lg w-full max-h-[90vh] overflow-auto animate-slide-up ${className}`}
+        className={`bg-black rounded-lg shadow-xl max-w-lg w-full max-h-[90vh] border-2 border-zinc-900 overflow-auto animate-slide-up ${className}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b">
-          {title && <h2 className="text-xl font-semibold">{title}</h2>}
-          <button
-            onClick={onClose}
-            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="Fechar modal"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        <div className="flex items-center justify-between p-2 border-b">
+          {title && <Title variant="white" size="lg">{title}</Title>}
+          <Button variant={color} size="icon" onClick={onClose} aria-label="Close modal">
+            <X color="white" size={50}/>
+          </Button>
         </div>
 
         {/* Content */}
