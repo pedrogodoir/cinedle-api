@@ -1,30 +1,29 @@
+'use client'
+
 import { EllipsisVertical } from "lucide-react"
 import Link from "next/link"
 import * as React from "react"
 import { Dropdown, DropdownItem } from "./dropdown"
 import { Modal } from "./modal"
+import { useState } from "react"
 
 interface HeaderProps {
-  variant?: "default" | "red" | "blue",
-  href?: string,
-  children: React.ReactNode,
-  className: React.ReactNode
+  xColor?: "disabled" | "default" | "red",
+  children?: React.ReactNode,
+  className?: React.ReactNode
 }
 
 const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
-  ({children, className = "", variant = "default", href = "", ...props }, ref) => {
-
-    const variants = {
-      default: "",
-      red: "font-semibold text-7xl bg-clip-text bg-gradient-to-b from-red-900 to-red-600 text-transparent",
-      blue: "font-semibold text-7xl bg-clip-text bg-gradient-to-b from-sky-900 to-sky-600 text-transparent"
-    }
-
-    const classes = `${variants[variant]}`
+  ({children, className = "", xColor = "default", ...props }, ref) => {
+    const [openModal, isOpenModal] = useState(false)
 
     return (
-        <div>
-            <div className="flex flex-row justify-between items-center gap-4">
+        <div className="flex flex-row justify-between items-center gap-4">
+          <Modal title="Settings" isOpen={openModal} onClose={() => {isOpenModal(false)}} color={xColor}>{null}</Modal>
+          <button onClick={() => isOpenModal(true)}>
+            <EllipsisVertical color="white" size={50} className="cursor-pointer"></EllipsisVertical>
+          </button>
+            <div className="flex flex-row justify-between items-center">
               {children}
             </div>
         </div>
