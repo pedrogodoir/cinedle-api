@@ -12,7 +12,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = "flex items-center justify-center rounded-full bg-black"
 
     const variants = {
-      default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+      default: "bg-gradient-to-b from-zinc-700 to-zinc-50 hover:bg-gradient-to-b hover:from-zinc-50 hover:to-zinc-700",
       disabled: "bg-gradient-to-b from-zinc-700 to-zinc-900",
       red: " bg-gradient-to-b from-red-600 to-red-900 hover:bg-gradient-to-b hover:from-red-900 hover:to-red-600"
     }
