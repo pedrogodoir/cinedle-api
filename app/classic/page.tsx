@@ -5,10 +5,9 @@ import { EllipsisVertical } from "lucide-react";
 export default function Classic() {
   return (
     <div className="flex flex-col justify-between items-center p-10 h-screen">
-      <Header variant="red">
-        <EllipsisVertical color="white" size={50} className="cursor-pointer"></EllipsisVertical>
+      <Header xColor="red">
         <Dropdown variant="red" trigger="Classic">
-          <DropdownItem variant="blue">Artwork</DropdownItem>
+          <DropdownLink variant="blue" href="">Artwork</DropdownLink>
           <DropdownLink variant="disabled" href="">Artwork</DropdownLink>
         </Dropdown>
       </Header>
