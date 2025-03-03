@@ -1,4 +1,7 @@
+'use client'
+
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import * as React from "react"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,6 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({children, className = "", variant = "default", href = "", size = "default", ...props }, ref) => {
+    const router = useRouter()
     const baseStyles = "flex items-center justify-center rounded-full bg-black"
 
     const variants = {
@@ -32,11 +36,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const spanClass = `${spanVariants[variant]}`
 
     return (
-        <Link href={href} className={classes}>
-            <button ref={ref} {...props}>
-                <span className={spanClass}>{children}</span>
+      <div>
+        {href ? (
+            <button className={classes} ref={ref} onClick={() => router.push(href)} {...props}>
+              <span className={spanClass}>{children}</span>
             </button>
-        </Link>
+        ) : (
+          <button className={classes} ref={ref} {...props}>
+            <span className={spanClass}>{children}</span>
+          </button>
+        )}
+      </div>
     )
   },
 )
