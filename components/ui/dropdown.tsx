@@ -3,9 +3,10 @@
 import * as React from "react"
 import Link from "next/link"
 import { ChevronDown } from "lucide-react"
+import { Title } from "./title"
 
 interface DropdownProps {
-  variant: 'default' | 'red' | 'blue'
+  variant?: 'default' | 'red' | 'blue' | 'white' | 'disabled'
   trigger: React.ReactNode
   children: React.ReactNode
 }
@@ -13,14 +14,6 @@ interface DropdownProps {
 export function Dropdown({ trigger, children, variant = 'default' }: DropdownProps) {
   const [isOpen, setIsOpen] = React.useState(false)
   const dropdownRef = React.useRef<HTMLDivElement>(null)
-
-  const variants = {
-    default: "",
-    red: "font-semibold text-7xl bg-clip-text bg-gradient-to-b from-red-900 to-red-600 text-transparent",
-    blue: "font-semibold text-7xl bg-clip-text bg-gradient-to-b from-sky-900 to-sky-600 text-transparent"
-  }
-
-  const classes = `${variants[variant]}`
 
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -62,9 +55,7 @@ export function Dropdown({ trigger, children, variant = 'default' }: DropdownPro
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span className="flex items-center gap-1">
-          <h1 className={classes}>{trigger}</h1>
-        </span>
+        <Title variant={variant} size="xl"> {trigger}</Title>
         <ChevronDown className={` transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} size={50} />
       </button>
 
@@ -82,61 +73,37 @@ export function Dropdown({ trigger, children, variant = 'default' }: DropdownPro
 }
 
 interface DropdownItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'red' | 'blue' | 'disabled'
+  variant?: 'default' | 'red' | 'blue' | 'white' | 'disabled'
   icon?: React.ReactNode
 }
 
 export function DropdownItem({ children, icon, className = "", variant = "default", ...props }: DropdownItemProps) {
-
-  const variants = {
-    default: "",
-    red: "font-semibold text-3xl bg-clip-text bg-gradient-to-b from-red-900 to-red-600 text-transparent",
-    blue: "font-semibold text-3xl bg-clip-text bg-gradient-to-b from-sky-900 to-sky-600 text-transparent",
-    disabled: "font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-400 to-zinc-600 text-transparent",
-  }
-
-  const classes = `${variants[variant]}`
-
   return (
     <button
       className={`w-full text-left px-4 py-2 flex items-center gap-2 hover:bg-zinc-950 ${className}`}
       role="menuitem"
       {...props}
     >
-      <span className={classes}>
-        {children}
-      </span>
+      <Title variant={variant} size="lg"> {children}</Title>
     </button>
   )
 }
 
 interface DropdownLinkProps {
-  variant?: 'default' | 'red' | 'blue' | 'disabled'
+  variant?: 'default' | 'red' | 'blue' | 'white' | 'disabled'
   href: string
   children: React.ReactNode
   className?: string
 }
 
 export function DropdownLink({ href, children, className = "", variant = "default" }: DropdownLinkProps) {
-
-  const variants = {
-    default: "",
-    red: "font-semibold text-3xl bg-clip-text bg-gradient-to-b from-red-900 to-red-600 text-transparent",
-    blue: "font-semibold text-3xl bg-clip-text bg-gradient-to-b from-sky-900 to-sky-600 text-transparent",
-    disabled: "font-semibold text-3xl bg-clip-text bg-gradient-to-b from-zinc-400 to-zinc-600 text-transparent",
-  }
-
-  const classes = `${variants[variant]}`
-
   return (
     <Link
       href={href}
       className={`w-full text-left px-4 py-2 flex items-center gap-2 hover:bg-zinc-950 ${className}`}
       role="menuitem"
     >
-      <span className={classes}>
-        {children}
-      </span>
+      <Title variant={variant} size="lg"> {children}</Title>
     </Link>
   )
 }

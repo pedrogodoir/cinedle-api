@@ -1,9 +1,7 @@
 'use client'
 
 import { EllipsisVertical } from "lucide-react"
-import Link from "next/link"
 import * as React from "react"
-import { Dropdown, DropdownItem } from "./dropdown"
 import { Modal } from "./modal"
 import { useState } from "react"
 
