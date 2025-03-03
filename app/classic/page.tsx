@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Dropdown, DropdownItem, DropdownLink } from "@/components/ui/dropdown";
 import { Header } from "@/components/ui/header";
-import { EllipsisVertical } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { EllipsisVertical, Search } from "lucide-react";
 
 export default function Classic() {
   return (
@@ -13,8 +15,11 @@ export default function Classic() {
       </Header>
       
       <div className="flex flex-col justify-between items-center h-screen w-[1000px] gap-10 p-20">
-        <div>
-          <input type="text" />
+        <div className="flex flex-row gap-4">
+          <Input placeholder="Type a Movie"></Input>
+          <Button variant="red" size="icon">
+            <Search color="white" size={45}></Search>
+          </Button>
         </div>
 
         <div className="flex flex-col justify-between items-center h-full w-[1000px] bg-black">
