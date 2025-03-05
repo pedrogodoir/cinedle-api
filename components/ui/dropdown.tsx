@@ -84,7 +84,7 @@ export function DropdownItem({ children, icon, className = "", variant = "defaul
       role="menuitem"
       {...props}
     >
-      <Title variant={variant} size="lg"> {children}</Title>
+      {children}
     </button>
   )
 }

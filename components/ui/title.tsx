@@ -20,7 +20,7 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
     }
 
     const sizes = {
-      default: "",
+      default: "font-semibold text-xl",
       lg: "font-semibold text-4xl",
       xl: "font-semibold text-7xl"
     }

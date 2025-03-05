@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Dropdown, DropdownItem, DropdownLink } from "@/components/ui/dropdown";
 import { Header } from "@/components/ui/header";
 import { Input } from "@/components/ui/input";
-import { EllipsisVertical, Search } from "lucide-react";
+import { Title } from "@/components/ui/title";
+import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Classic() {
   const [guessMovie, setGuessMovie] = useState([]);
-  const [movie, setMovie] = useState<{ title: string }[]>([]);
+  const [movie, setMovie] = useState<{ title: string; poster_path: string }[]>([]);
 
   useEffect(() => {
     const getGuessMovie = async () => {
@@ -52,9 +53,16 @@ export default function Classic() {
         <div className="flex flex-row gap-4">
           <Input placeholder="Type a Movie" onChange={(e) => handleSearchMovie(e.target.value)}>
             {movie.map((item, index) => (
-              <h1 key={index}>{item.title}</h1>
+              <DropdownItem key={index} onClick={() => console.log(item.title)}>
+                <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} className="w-6 h-10" />
+
+                <Title>
+                  {item.title}
+                </Title>
+              </DropdownItem>
             ))}
           </Input>
+
           <Button variant="red" size="icon" >
             <Search color="white" size={45}></Search>
           </Button>
