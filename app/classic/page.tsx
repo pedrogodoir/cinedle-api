@@ -11,13 +11,14 @@ import { useEffect, useState } from "react";
 
 export default function Classic() {
   const [guessMovie, setGuessMovie] = useState([]);
-  const [Movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState<{ title: string }[]>([]);
 
   useEffect(() => {
     const getGuessMovie = async () => {
       try {
         const response = await topRated();
         const result = await response.results[Math.floor(Math.random() * response.results.length)];
+        console.log(result)
         setGuessMovie(result)
       } catch (error) {
         console.error("Erro:", error)
@@ -27,13 +28,15 @@ export default function Classic() {
   },[])
 
   const handleSearchMovie = async (query: string) => {
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     try {
       const response = await searchMovie(query);
-      console.log(response)
       setMovie(response.results)
+      console.log(movie)
     } catch (error) {
       console.error("Erro:", error)
     }
+    await delay(1000);
   }
 
   return (
@@ -47,7 +50,11 @@ export default function Classic() {
       
       <div className="flex flex-col justify-between items-center h-screen w-[1000px] gap-10 p-20">
         <div className="flex flex-row gap-4">
-          <Input placeholder="Type a Movie" onChange={(e) => handleSearchMovie(e.target.value)}></Input>
+          <Input placeholder="Type a Movie" onChange={(e) => handleSearchMovie(e.target.value)}>
+            {movie.map((item, index) => (
+              <h1 key={index}>{item.title}</h1>
+            ))}
+          </Input>
           <Button variant="red" size="icon" >
             <Search color="white" size={45}></Search>
           </Button>

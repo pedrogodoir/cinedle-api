@@ -61,7 +61,7 @@ export function Dropdown({ trigger, children, variant = 'default' }: DropdownPro
 
       {isOpen && (
         <div
-          className={`absolute mt-2 py-2 w-full bg-black rounded-md shadow-lg ring-2 ring-zinc-900 z-0`}
+          className={`absolute mt-2 py-2 w-full bg-black rounded-md shadow-lg ring-2 ring-zinc-900 z-[1000]`}
           role="menu"
           aria-orientation="vertical"
         >

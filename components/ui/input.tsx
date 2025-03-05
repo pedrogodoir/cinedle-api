@@ -3,12 +3,12 @@
 import * as React from "react";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  data?: Array<[]>,
+  open?: boolean
 }
 
-export function Input({ children, data, ...props }: InputProps) {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const inputRef = React.useRef<HTMLInputElement>(null)
+export function Input({ children, open, ...props }: InputProps) {
+  const [isOpen, setIsOpen] = React.useState(open || false)
+  const inputRef = React.useRef<HTMLDivElement>(null)
   
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -42,17 +42,21 @@ export function Input({ children, data, ...props }: InputProps) {
     }
   }, [isOpen])
 
-  if(data) {
-    setIsOpen(true)
+  function handleOnSelect() {
+    if(children == ''){
+      setIsOpen(false)
+    }else {
+      setIsOpen(true)
+    }
   }
 
   return (
-    <div>
-      <input className=" w-96 h-[72px] font-semibold text-3xl py-2 px-6 bg-black rounded-full shadow-lg ring-2 ring-zinc-900 placeholder:text-zinc-700" {...props} />
+    <div ref={inputRef} className="relative">
+      <input className=" w-96 h-[72px] font-semibold text-3xl py-2 px-6 bg-black rounded-full shadow-lg ring-2 ring-zinc-900 placeholder:text-zinc-700" onSelect={handleOnSelect} {...props} />
 
       {isOpen && (
         <div
-          className={`absolute mt-2 py-2 w-full bg-black rounded-md shadow-lg ring-2 ring-zinc-900 z-0`}
+          className={`absolute mt-2 py-2 w-96 bg-black rounded-md shadow-lg ring-2 ring-zinc-900 z-0`}
           role="menu"
           aria-orientation="vertical"
         >
