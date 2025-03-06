@@ -25,7 +25,7 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
       xl: "font-semibold text-7xl"
     }
 
-    const classes = `${sizes[size]} ${variants[variant]}`
+    const classes = `${sizes[size]} ${variants[variant]} ${className}`
 
     return (
         <span className={classes}>
