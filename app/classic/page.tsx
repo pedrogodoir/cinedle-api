@@ -9,12 +9,14 @@ import { Header } from "@/components/ui/header";
 import { Input } from "@/components/ui/input";
 import Table from "@/components/ui/table";
 import { Title } from "@/components/ui/title";
+import { movieSchema } from "@/lib/schemas/searchMovieSchema";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import Zod from "zod";
 
 export default function Classic() {
-  const [guessMovie, setGuessMovie] = useState([]);
-  const [movie, setMovie] = useState<{ title: string; poster_path: string; id: number }[]>([]);
+  const [guessMovie, setGuessMovie] = useState<Zod.infer<typeof movieSchema> | null>(null);
+  const [movie, setMovie] = useState<Zod.infer<typeof movieSchema>[]>([]);
   const [tableData, setTableData] = useState<any[]>([]);
 
   const headers = [ "Title", "Genres", "Vote Average", "Budget", "Release Date"];
@@ -43,7 +45,7 @@ export default function Classic() {
     try {
       const response = await searchMovie(query);
       setMovie(response.results)
-      console.log(movie)
+      console.log(response.results)
     } catch (error) {
       console.error("Erro:", error)
     }
