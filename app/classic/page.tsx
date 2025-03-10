@@ -10,12 +10,13 @@ import { Input } from "@/components/ui/input";
 import Table from "@/components/ui/table";
 import { Title } from "@/components/ui/title";
 import { movieSchema } from "@/lib/schemas/searchMovieSchema";
+import { movieDetailsSchema } from "@/lib/schemas/movieSchema";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Zod from "zod";
 
 export default function Classic() {
-  const [guessMovie, setGuessMovie] = useState<Zod.infer<typeof movieSchema> | null>(null);
+  const [guessMovie, setGuessMovie] = useState<Zod.infer<typeof movieDetailsSchema> | null>(null);
   const [movie, setMovie] = useState<Zod.infer<typeof movieSchema>[]>([]);
   const [tableData, setTableData] = useState<any[]>([]);
 
@@ -31,8 +32,13 @@ export default function Classic() {
       try {
         const response = await topRated();
         const result = await response.results[Math.floor(Math.random() * response.results.length)];
-        console.log(result)
-        setGuessMovie(result)
+        try {
+          const response = await getMovie(result.id);
+          console.log(response)
+          setGuessMovie(response)
+        } catch (error) {
+          console.error("Erro:", error)
+        }
       } catch (error) {
         console.error("Erro:", error)
       }
