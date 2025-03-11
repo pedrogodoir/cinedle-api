@@ -1,16 +1,11 @@
 import { z } from "zod";
-import { genreArraySchema } from "../schemas/genreSchema"
+import { genreSchema } from "../schemas/genreSchema"
 
 export const belongsToCollectionSchema = z.object({
   id: z.number(),
   name: z.string(),
   poster_path: z.string(),
   backdrop_path: z.string(),
-});
-
-export const genreSchema = z.object({
-  id: z.number(),
-  name: z.string(),
 });
 
 export const productionCompanySchema = z.object({
@@ -36,7 +31,7 @@ export const movieDetailsSchema = z.object({
   backdrop_path: z.string(),
   belongs_to_collection: belongsToCollectionSchema,
   budget: z.number(),
-  genres: genreArraySchema,
+  genres: z.array(genreSchema),
   homepage: z.string(),
   id: z.number(),
   imdb_id: z.string(),
