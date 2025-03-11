@@ -22,6 +22,7 @@ export default function Classic() {
   const [movieId, setMovieId] = useState<number>(0);
   const [tableData, setTableData] = useState<any[]>([]);
   const [tableColors, setTableColors] = useState<any[]>([]);
+  const [directors, setDirectors] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
   const headers = [ "Title", "Genres", "Production Companies", "Director(s)", "Release Year"];
@@ -66,7 +67,7 @@ export default function Classic() {
       const response = await getMovie(id);
 
       if (guessMovie) {
-        comparision(response, guessMovie)
+        setTableColors(await comparision(response, guessMovie))
       } else {
         console.error("Guess movie is undefined")
       }
@@ -129,11 +130,12 @@ export default function Classic() {
       
       let directorGuessLength = 0
 
+      setDirectors([...directors, responseMovie.crew.filter((member) => member.job === "Director").map((director) => director.name)])
       for (let i = 0; i < responseMovie.crew.length; i++) {
-        if(responseMovie.crew[i].job == "director") {
+        if(responseMovie.crew[i].job == "Director") {
 
           for (let j = 0; guessMovie && j < responseGuess.crew.length; j++) {
-            if(responseGuess.crew[i].job == "director") {
+            if(responseGuess.crew[i].job == "Director") {
               directorGuessLength++
               
               if(responseMovie.crew[i].name == responseGuess.crew[j].name) {
@@ -143,6 +145,7 @@ export default function Classic() {
           }
         }
       }
+      console.log(directors, "haha")
       if(directorsColor == directorGuessLength) {
         newTableColors.push("green")
       } else if(directorsColor != 0) {
@@ -171,6 +174,7 @@ export default function Classic() {
     }
 
     console.log(newTableColors)
+    return newTableColors
   }
 
   return (
@@ -201,7 +205,7 @@ export default function Classic() {
           </Button>
         </div>
 
-        <Table headers={headers} data={tableData}></Table>
+        <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
       </div>
 
       <div className="absolute inset-0 bg-no-repeat z-[-1]" 

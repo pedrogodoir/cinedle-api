@@ -1,12 +1,17 @@
 import React from 'react';
 import { Title } from './title';
+import { movieDetailsArray } from '@/lib/schemas/movieSchema';
 
 interface TableProps {
   headers: string[];
-  data: Array<{ [key: string]: any }>;
+  colors: string[];
+  directors: string[];
+  data: Zod.infer<typeof movieDetailsArray>;
 }
 
-const Table: React.FC<TableProps> = ({ headers, data }) => {
+const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
+
+  console.log(directors)
   return (
     <div className='flex flex-col bg-black rounded-[40px] ring-2 ring-zinc-900 py-2 px-6 shadow-lg gap-2'>
       <div className='flex justify-between bg-zinc-900 gap-[2px]'>
@@ -28,26 +33,34 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
               </div>
 
               <div className='w-44 px-2 bg-black'> 
-                <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex justify-center items-center'>
-                  <Title>{row.genres[0].name}</Title>
+                <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex flex-col justify-center'>
+                  {row.genres.map((genre, index) => (
+                    <Title size='sm' key={index}>{genre.name},</Title>
+                  ))}
+                </div>
+              </div>
+
+              <div className='w-44 px-2 bg-black flex justify-center items-center'>
+                <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex flex-col justify-center'>
+                  {row.production_companies.map((companie, index) => (
+                    <Title size='sm' key={index}>{companie.name},</Title>
+                  ))}
+
+                </div>
+              </div>
+
+              <div className='w-44 px-2 bg-black flex justify-center items-center'>
+                <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center'>
+                  
+                  {Array.isArray(directors[rowIndex]) && directors[rowIndex].map((director: string, index: number) => (
+                    <Title size='sm' key={index}>{director},</Title>
+                  ))}
                 </div>
               </div>
 
               <div className='w-44 px-2 bg-black flex justify-center items-center'>
                 <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex justify-center items-center'>
-                  <Title>{row.vote_average}</Title>
-                </div>
-              </div>
-
-              <div className='w-44 px-2 bg-black flex justify-center items-center'>
-                <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex justify-center items-center'>
-                  <Title>{row.budget}</Title>
-                </div>
-              </div>
-
-              <div className='w-44 px-2 bg-black flex justify-center items-center'>
-                <div className=' bg-red-700 w-full h-full p-2 rounded-xl flex justify-center items-center'>
-                  <Title>{row.release_date}</Title>
+                  <Title>{row.release_date.split("-")[0]}</Title>
                 </div>
               </div>
             </div>

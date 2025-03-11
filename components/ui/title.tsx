@@ -2,14 +2,14 @@ import * as React from "react"
 
 interface TitleProps {
   variant?: "default" | "red" | "blue" | "white" | "disabled",
-  size?: "default" | "lg" | "xl",
+  size?: "default" | "lg" | "xl" | "sm",
   href?: string,
   children: React.ReactNode,
   className?: React.ReactNode
 }
 
 const Title = React.forwardRef<HTMLDivElement, TitleProps>(
-  ({children, className = "", variant = "default", href = "",size = "default", ...props }, ref) => {
+  ({children, className = "", variant = "default", href = "", size = "default", ...props }, ref) => {
 
     const variants = {
       default: " bg-clip-text bg-gradient-to-b from-zinc-50 to-zinc-300 text-transparent",
@@ -20,6 +20,7 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
     }
 
     const sizes = {
+      sm: "font-semibold text-base",
       default: "font-semibold text-xl",
       lg: "font-semibold text-4xl",
       xl: "font-semibold text-7xl"

@@ -54,3 +54,5 @@ export const movieDetailsSchema = z.object({
   vote_average: z.number(),
   vote_count: z.number(),
 });
+
+export const movieDetailsArray = z.array(movieDetailsSchema)
