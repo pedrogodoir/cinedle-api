@@ -15,7 +15,14 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
 
   const setColors = (row: number, col: number) => {
-    return `bg-${colors[row][col]}-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center`
+    if(colors[row][col] == "red") {
+      return 'bg-red-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center'
+    } else if(colors[row][col] == "yellow") {
+      return 'bg-yellow-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center'
+    } else if(colors[row][col] == "green") {
+      return 'bg-green-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center'
+    }
+    return ''
   }
 
   return (
@@ -71,10 +78,6 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
                 </div>
               </div>
             </div>
-            
-            {/* {headers.map((header, colIndex) => (
-              <span key={colIndex}>{row[header]}</span>
-            ))} */}
           </div>
         ))}
       </div>
