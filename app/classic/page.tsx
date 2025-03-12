@@ -52,7 +52,6 @@ export default function Classic() {
       const response = await searchMovie(query);
 
       setMovieList(response.results)
-      console.log(response.results)
     } catch (error) {
       console.error("Erro:", error)
     }
@@ -67,13 +66,14 @@ export default function Classic() {
       const response = await getMovie(id);
 
       if (guessMovie) {
-        setTableColors(await comparision(response, guessMovie))
+        setTableColors([...tableColors, await comparision(response, guessMovie)])
       } else {
         console.error("Guess movie is undefined")
       }
 
+      console.log(tableColors)
+
       setTableData([...tableData, response])
-      console.log(tableData)
     } catch (error) {
       console.error("Erro:", error)
     }
@@ -115,7 +115,7 @@ export default function Classic() {
         }
       }
     }
-    if(companiesColor == movie.genres.length && companiesColor == guess.genres.length) {
+    if(companiesColor == movie.production_companies.length && companiesColor == guess.production_companies.length) {
       newTableColors.push("green")
     } else if(companiesColor != 0) {
       newTableColors.push("yellow")
@@ -135,7 +135,7 @@ export default function Classic() {
         if(responseMovie.crew[i].job == "Director") {
 
           for (let j = 0; guessMovie && j < responseGuess.crew.length; j++) {
-            if(responseGuess.crew[i].job == "Director") {
+            if (responseGuess.crew[j] && responseGuess.crew[j].job === "Director") {
               directorGuessLength++
               
               if(responseMovie.crew[i].name == responseGuess.crew[j].name) {
@@ -168,9 +168,11 @@ export default function Classic() {
 
     // defining directions for years
     if(yearMovie - yearGuess > 0) {
-      newTableColors.push("down")
+      newTableColors.push("Down")
+    } else if(yearMovie - yearGuess < 0) {
+      newTableColors.push("Up")
     } else {
-      newTableColors.push("up")
+      newTableColors.push("")
     }
 
     console.log(newTableColors)
