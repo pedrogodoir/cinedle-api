@@ -35,16 +35,16 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
         ))}
       </div>
       <div className='flex flex-col gap-2'>
-        {data.map((row, rowIndex) => (
+        {data.slice().reverse().map((row, rowIndex) => (
           <div className='flex flex-col gap-2' key={rowIndex}>
             <div className='w-full bg-zinc-900 h-[2px]'></div>
-
+  
             <div className=' justify-between bg-zinc-900 gap-[2px] flex flex-row'>
               <div className='w-64 bg-black flex justify-center items-center z-10 px-4'>
                 <img src={`https://image.tmdb.org/t/p/w500${row.backdrop_path}`} alt={row.title} className=" z-[-1] w-52 brightness-50 rounded-xl" />
                 <Title className="absolute max-w-48">{row.title}</Title>
               </div>
-
+  
               <div className='w-64 px-2 bg-black'> 
                 <div className={setColors(rowIndex,0)}>
                   {row.genres.map((genre, index) => (
@@ -52,16 +52,15 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
                   ))}
                 </div>
               </div>
-
+  
               <div className='w-64 px-2 bg-black flex justify-center items-center'>
                 <div className={setColors(rowIndex,1)}>
-                  {row.production_companies.map((companie, index) => (
+                  {row.production_companies.slice().reverse().map((companie, index) => (
                     <Title size='sm' key={index}>{companie.name},</Title>
                   ))}
-
                 </div>
               </div>
-
+  
               <div className='w-64 px-2 bg-black flex justify-center items-center'>
                 <div className={setColors(rowIndex,2)}>
                   {Array.isArray(directors[rowIndex]) && directors[rowIndex].map((director: string, index: number) => (
@@ -69,7 +68,7 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
                   ))}
                 </div>
               </div>
-
+  
               <div className='w-64 px-2 bg-black flex justify-center items-center'>
                 <div className={setColors(rowIndex,3)}>
                   {colors[rowIndex][4] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}

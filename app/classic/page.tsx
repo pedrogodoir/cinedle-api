@@ -66,7 +66,7 @@ export default function Classic() {
       const response = await getMovie(id);
 
       if (guessMovie) {
-        setTableColors([...tableColors, await comparision(response, guessMovie)])
+        setTableColors([await comparision(response, guessMovie), ...tableColors])
       } else {
         console.error("Guess movie is undefined")
       }
@@ -130,7 +130,7 @@ export default function Classic() {
       
       let directorGuessLength = 0
 
-      setDirectors([...directors, responseMovie.crew.filter((member) => member.job === "Director").map((director) => director.name)])
+      setDirectors([responseMovie.crew.filter((member) => member.job === "Director").map((director) => director.name), ...directors])
       for (let i = 0; i < responseMovie.crew.length; i++) {
         if(responseMovie.crew[i].job == "Director") {
 
