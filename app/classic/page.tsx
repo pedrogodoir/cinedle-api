@@ -15,6 +15,7 @@ import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Zod, { number } from "zod";
 import { getCredits } from "@/api/getCredits";
+import JSConfetti from 'js-confetti'
 
 export default function Classic() {
   const [guessMovie, setGuessMovie] = useState<Zod.infer<typeof movieDetailsSchema>>();
@@ -174,8 +175,12 @@ export default function Classic() {
     } else {
       newTableColors.push("")
     }
+ 
+    if(JSON.stringify(newTableColors) === JSON.stringify(['green', 'green', 'green', 'green', ''])) {
+      const jsConfetti = new JSConfetti()
+      jsConfetti.addConfetti()
+    }
 
-    console.log(newTableColors)
     return newTableColors
   }
 
