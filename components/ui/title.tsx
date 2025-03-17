@@ -29,7 +29,7 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
     const classes = `${sizes[size]} ${variants[variant]} ${className}`
 
     return (
-        <span className={classes}>
+        <span className={classes} ref={ref} {...props}>
             {children}
         </span>
     )
