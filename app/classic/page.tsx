@@ -146,7 +146,6 @@ export default function Classic() {
           }
         }
       }
-      console.log(directors, "haha")
       if(directorsColor == directorGuessLength) {
         newTableColors.push("green")
       } else if(directorsColor != 0) {
@@ -156,6 +155,16 @@ export default function Classic() {
       }
     } catch (error) {
       console.error("Erro:", error)
+    }
+
+    if(movie.revenue == guess.revenue) {
+      newTableColors.push("green")
+    } else if (movie.revenue > guess.revenue) {
+      newTableColors.push("Down")
+    } else if (movie.revenue > guess.revenue) {
+      newTableColors.push("Up")
+    } else {
+      newTableColors.push("")
     }
 
     // defining color for years

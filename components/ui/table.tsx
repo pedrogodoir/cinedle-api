@@ -22,7 +22,7 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
     } else if(colors[row][col] == "green") {
       return 'bg-green-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center'
     }
-    return ''
+    return 'bg-red-700 w-full h-full p-2 rounded-xl flex flex-col justify-center items-center'
   }
 
   return (
@@ -71,8 +71,16 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
   
               <div className='w-64 px-2 bg-black flex justify-center items-center'>
                 <div className={setColors(rowIndex,3)}>
-                  {colors[rowIndex][4] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
-                  {colors[rowIndex][4] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                  {colors[rowIndex][3] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                  {colors[rowIndex][3] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                  <Title className="absolute max-w-48">{row.release_date.split("-")[0]}</Title>
+                </div>
+              </div>
+
+              <div className='w-64 px-2 bg-black flex justify-center items-center'>
+                <div className={setColors(rowIndex,4)}>
+                  {colors[rowIndex][5] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                  {colors[rowIndex][5] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
                   <Title className="absolute max-w-48">{row.release_date.split("-")[0]}</Title>
                 </div>
               </div>
