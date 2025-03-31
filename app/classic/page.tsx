@@ -92,7 +92,6 @@ export default function Classic() {
     let yearArrow = 0
     let newTableColors = []
 
-    // defining color for genre
     for (let i = 0; i < movie.genres.length; i++) {
       for (let j = 0; j < guess.genres.length; j++) {
         if(movie.genres[i].id == guess.genres[j].id) {
@@ -108,7 +107,6 @@ export default function Classic() {
       newTableColors.push("red")
     }
 
-    // defining color for companies
     for (let i = 0; i < movie.production_companies.length; i++) {
       for (let j = 0; j < guess.production_companies.length; j++) {
         if(movie.production_companies[i].id == guess.production_companies[j].id) {
@@ -124,7 +122,6 @@ export default function Classic() {
       newTableColors.push("red")
     }
 
-    // defining color for directors
     try {
       const responseMovie = await getCredits(movie.id);
       const responseGuess = await getCredits(guess.id);
@@ -167,7 +164,7 @@ export default function Classic() {
       newTableColors.push("")
     }
 
-    // defining color for years
+
     const yearMovie = parseInt(movie.release_date.split("-")[0], 10)
     const yearGuess = parseInt(guess.release_date.split("-")[0], 10)
     if(yearMovie == yearGuess && yearMovie - yearGuess == 0) {
@@ -176,7 +173,7 @@ export default function Classic() {
       newTableColors.push("red")
     }
 
-    // defining directions for years
+
     if(yearMovie - yearGuess > 0) {
       newTableColors.push("Down")
     } else if(yearMovie - yearGuess < 0) {
