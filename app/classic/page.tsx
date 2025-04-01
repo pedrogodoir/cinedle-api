@@ -26,7 +26,7 @@ export default function Classic() {
   const [directors, setDirectors] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
-  const headers = [ "Title", "Genres", "Production Companies", "Director(s)", "Release Year"];
+  const headers = [ "Title", "Genres", "Production Companies", "Director(s)", "Revenue", "Release Year"];
 
   useEffect(() => {
     const getGuessMovie = async () => {

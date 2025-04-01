@@ -1,7 +1,7 @@
 import * as React from "react"
 
 interface TitleProps {
-  variant?: "default" | "red" | "blue" | "white" | "disabled",
+  variant?: "default" | "red" | "blue" | "white" | "offWhite" | "disabled",
   size?: "default" | "lg" | "xl" | "sm",
   href?: string,
   children: React.ReactNode,
@@ -16,6 +16,7 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
       red: " bg-clip-text bg-gradient-to-b from-red-900 to-red-600 text-transparent",
       blue: " bg-clip-text bg-gradient-to-b from-sky-900 to-sky-600 text-transparent",
       white: " bg-clip-text bg-gradient-to-b from-zinc-900 to-zinc-50 text-transparent",
+      offWhite: " color-zinc-50",
       disabled: " bg-clip-text bg-gradient-to-b from-zinc-400 to-zinc-600 text-transparent"
     }
 

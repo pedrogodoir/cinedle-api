@@ -40,9 +40,10 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
             <div className='w-full bg-zinc-900 h-[2px]'></div>
   
             <div className=' justify-between bg-zinc-900 gap-[2px] flex flex-row'>
-              <div className='w-64 bg-black flex justify-center items-center z-10 px-4'>
-                <img src={`https://image.tmdb.org/t/p/w500${row.backdrop_path}`} alt={row.title} className=" z-[-1] w-52 brightness-50 rounded-xl" />
-                <Title className="absolute max-w-48">{row.title}</Title>
+              <div className="bg-center bg-cover bg-origin-border w-64 bg-black flex justify-center items-center z-10 px-4 overflow-hidden">
+                <div className='bg-cover w-full h-full bg-black opacity-50 rounded-xl' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${row.poster_path})` }}></div>
+                {/* <img src={`https://image.tmdb.org/t/p/w500${row.poster_path}`} alt={row.title} className=" overflow-hidden z-[-1] brightness-50 rounded-xl" /> */}
+                <Title className="absolute max-w-48 flex items-center justify-center" variant='offWhite' >{row.title}</Title>
               </div>
   
               <div className='w-64 px-2 bg-black'> 
@@ -73,7 +74,7 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
                 <div className={setColors(rowIndex,3)}>
                   {colors[rowIndex][3] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
                   {colors[rowIndex][3] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
-                  <Title className="absolute max-w-48">{row.release_date.split("-")[0]}</Title>
+                  <Title className="absolute max-w-48">${row.revenue}</Title>
                 </div>
               </div>
 
