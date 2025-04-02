@@ -22,14 +22,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const spanVariants = {
-      default: "font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-50 to-zinc-300 text-transparent",
+      default: "font-semibold text-4xl from-zinc-50",
       disabled: "font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-400 to-zinc-600 text-transparent cursor-default",
       red: "font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-50 to-zinc-300 text-transparent"
     }
 
     const sizes = {
       default: "w-96 h-[72px]",
-      box: "w-[275px] h-[275px] hover:items-start hover:justify-start p-[20px] gap-3",
+      box: "max-w-[275px] hover:items-start hover:justify-start p-5 gap-3 transition-[width,height] duration-300",
       icon: "w-[72px] h-[72px]",
     }
     

@@ -21,6 +21,7 @@ export default function Classic() {
   const [guessMovie, setGuessMovie] = useState<Zod.infer<typeof movieDetailsSchema>>();
   const [movieList, setMovieList] = useState<Zod.infer<typeof movieSchema>[]>([]);
   const [movieId, setMovieId] = useState<number>(0);
+  const [hit, setHit] = useState<number>(0);
   const [tableData, setTableData] = useState<any[]>([]);
   const [tableColors, setTableColors] = useState<any[]>([]);
   const [directors, setDirectors] = useState<any[]>([]);
@@ -182,9 +183,10 @@ export default function Classic() {
       newTableColors.push("")
     }
  
-    if(JSON.stringify(newTableColors) === JSON.stringify(['green', 'green', 'green', 'green', ''])) {
+    if(JSON.stringify(newTableColors) === JSON.stringify(['green', 'green', 'green', 'green', 'green', ''])) {
       const jsConfetti = new JSConfetti()
       jsConfetti.addConfetti()
+      setHit(1)
     }
 
     return newTableColors
@@ -217,8 +219,13 @@ export default function Classic() {
             <Search color="white" size={45}></Search>
           </Button>
         </div>
-
-        <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
+        {hit == 1 ? (
+          <div>
+            <img src={`https://image.tmdb.org/t/p/w500${guessMovie?.poster_path}`} alt="" />
+          </div>
+        ) : (
+          <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
+        )}
       </div>
 
       <div className="absolute inset-0 bg-no-repeat z-[-1]" 
