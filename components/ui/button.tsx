@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import * as React from "react"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "red" | "disabled",
+  variant?: "default" | "red" | "disabled" | "blue",
   href?: string,
   size?: "default" | "icon" | "box"
 }
@@ -18,13 +18,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const variants = {
       default: "bg-gradient-to-b from-zinc-700 to-zinc-50 hover:bg-gradient-to-b hover:from-zinc-50 hover:to-zinc-700",
       disabled: "bg-gradient-to-b from-zinc-700 to-zinc-900 cursor-default",
-      red: " bg-gradient-to-b from-red-600 to-red-900 hover:bg-gradient-to-b hover:from-red-900 hover:to-red-600"
-    }
-
-    const spanVariants = {
-      default: "font-semibold text-4xl from-zinc-50",
-      disabled: "font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-400 to-zinc-600 text-transparent cursor-default",
-      red: "font-semibold text-4xl bg-clip-text bg-gradient-to-b from-zinc-50 to-zinc-300 text-transparent"
+      red: " bg-gradient-to-b from-red-600 to-red-900 hover:bg-gradient-to-b hover:from-red-900 hover:to-red-600",
+      blue: " bg-gradient-to-b from-sky-600 to-sky-900 hover:bg-gradient-to-b hover:from-sky-900 hover:to-sky-600"
     }
 
     const sizes = {
@@ -34,7 +29,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
     
     const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`
-    const spanClass = `${spanVariants[variant]}`
 
     return (
       <div>

@@ -26,6 +26,7 @@ export default function Classic() {
   const [tableColors, setTableColors] = useState<any[]>([]);
   const [directors, setDirectors] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
+  const [mouseInArtwork, setMouseInArtwork] = useState(false);
 
   const headers = [ "Title", "Genres", "Production Companies", "Director(s)", "Revenue", "Release Year"];
 
@@ -201,32 +202,39 @@ export default function Classic() {
         </Dropdown>
       </Header>
       
-      <div className="flex flex-col items-center h-screen gap-10 p-20">
-        <div className="flex flex-row gap-4">
-          <Input placeholder="Type a Movie" value={inputValue} onChange={(e) => {setInputValue(e.target.value); handleSearchMovie(e.target.value)}}>
-            {movieList.map((item, index) => (
-              <DropdownItem key={index} onClick={() => handleDropdownItemClick(item.title, item.id)}>
-                <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} className="w-6 h-10" />
-
-                <Title>
-                  {item.title}
-                </Title>
-              </DropdownItem>
-            ))}
-          </Input>
-
-          <Button variant="red" size="icon" onClick={() => handleGame(movieId)}>
-            <Search color="white" size={45}></Search>
-          </Button>
-        </div>
         {hit == 1 ? (
-          <div>
+          <div className="flex flex-col items-center h-screen gap-10 p-20">
+            <Title>The film was {guessMovie?.title}</Title>
+            <Button variant="blue" href="/artwork" id="classic" size="box" onMouseEnter={() => setMouseInArtwork(true)} onMouseLeave={() => setMouseInArtwork(false)}>
+            <Title size="lg">Artwork</Title>
+            {mouseInArtwork ? (
+              <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
+            ) : (<span></span>)}
+          </Button>
             <img src={`https://image.tmdb.org/t/p/w500${guessMovie?.poster_path}`} alt="" />
           </div>
         ) : (
-          <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
+          <div className="flex flex-col items-center h-screen gap-10 p-20">
+            <div className="flex flex-row gap-4">
+            <Input placeholder="Type a Movie" value={inputValue} onChange={(e) => {setInputValue(e.target.value); handleSearchMovie(e.target.value)}}>
+              {movieList.map((item, index) => (
+                <DropdownItem key={index} onClick={() => handleDropdownItemClick(item.title, item.id)}>
+                  <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} className="w-6 h-10" />
+  
+                  <Title>
+                    {item.title}
+                  </Title>
+                </DropdownItem>
+              ))}
+            </Input>
+  
+            <Button variant="red" size="icon" onClick={() => handleGame(movieId)}>
+              <Search color="white" size={45}></Search>
+            </Button>
+          </div>
+            <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
+          </div>
         )}
-      </div>
 
       <div className="absolute inset-0 bg-no-repeat z-[-1]" 
         style={{
