@@ -197,21 +197,32 @@ export default function Classic() {
     <div className="flex flex-col justify-between items-center p-10 h-screen">
       <Header xColor="red">
         <Dropdown variant="red" trigger="Classic">
-          <DropdownLink variant="blue" href="">Artwork</DropdownLink>
-          <DropdownLink variant="disabled" href="">Artwork</DropdownLink>
+          <DropdownLink href="/">
+            <Title variant="red" size="lg" >Cine</Title>
+            <Title variant="white" size="lg">dle</Title>
+          </DropdownLink>
+
+          <DropdownLink href="">
+            <Title variant="disabled" size="lg">Artwork</Title>
+          </DropdownLink>
         </Dropdown>
       </Header>
       
         {hit == 1 ? (
           <div className="flex flex-col items-center h-screen gap-10 p-20">
-            <Title>The film was {guessMovie?.title}</Title>
-            <Button variant="blue" href="/artwork" id="classic" size="box" onMouseEnter={() => setMouseInArtwork(true)} onMouseLeave={() => setMouseInArtwork(false)}>
-            <Title size="lg">Artwork</Title>
-            {mouseInArtwork ? (
-              <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
-            ) : (<span></span>)}
-          </Button>
-            <img src={`https://image.tmdb.org/t/p/w500${guessMovie?.poster_path}`} alt="" />
+            <div>
+              <div className="bg-black border-t-4 border-r-4 border-l-4 p-5 border-zinc-900 rounded-t-xl w-96">
+                <Title>The film was {guessMovie?.title}</Title>
+              </div>
+              <img src={`https://image.tmdb.org/t/p/w500${guessMovie?.poster_path}`} className="w-96 border-b-4 border-l-4 border-r-4 border-zinc-900" alt="" />
+            </div>
+
+              <Button variant="blue" href="/artwork" id="classic" size="box" onMouseEnter={() => setMouseInArtwork(true)} onMouseLeave={() => setMouseInArtwork(false)}>
+                <Title size="lg">Artwork</Title>
+                {mouseInArtwork ? (
+                  <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
+                ) : (<span></span>)}
+              </Button>
           </div>
         ) : (
           <div className="flex flex-col items-center h-screen gap-10 p-20">

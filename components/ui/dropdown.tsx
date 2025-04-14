@@ -90,20 +90,19 @@ export function DropdownItem({ children, icon, className = "", variant = "defaul
 }
 
 interface DropdownLinkProps {
-  variant?: 'default' | 'red' | 'blue' | 'white' | 'disabled'
   href: string
   children: React.ReactNode
   className?: string
 }
 
-export function DropdownLink({ href, children, className = "", variant = "default" }: DropdownLinkProps) {
+export function DropdownLink({ href, children, className = "" }: DropdownLinkProps) {
   return (
     <Link
       href={href}
-      className={`w-full text-left px-4 py-2 flex items-center gap-2 hover:bg-zinc-950 ${className}`}
+      className={`w-full text-left px-4 py-2 flex items-center hover:bg-zinc-950 ${className}`}
       role="menuitem"
     >
-      <Title variant={variant} size="lg"> {children}</Title>
+      {children}
     </Link>
   )
 }
