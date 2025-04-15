@@ -209,20 +209,22 @@ export default function Classic() {
       </Header>
       
         {hit == 1 ? (
-          <div className="flex flex-col items-center h-screen gap-10 p-20">
+          <div className="flex flex-col items-center h-screen gap-3 p-20">
             <div>
               <div className="bg-black border-t-4 border-r-4 border-l-4 p-5 border-zinc-900 rounded-t-xl w-96">
-                <Title>The film was {guessMovie?.title}</Title>
+                <Title size="lg">{guessMovie?.title}</Title>
               </div>
               <img src={`https://image.tmdb.org/t/p/w500${guessMovie?.poster_path}`} className="w-96 border-b-4 border-l-4 border-r-4 border-zinc-900" alt="" />
             </div>
 
+            <div className="flex flex-col justify-center items-center">
+              <Title size="lg" className="text-center">Play too:</Title>
+
               <Button variant="blue" href="/artwork" id="classic" size="box" onMouseEnter={() => setMouseInArtwork(true)} onMouseLeave={() => setMouseInArtwork(false)}>
                 <Title size="lg">Artwork</Title>
-                {mouseInArtwork ? (
-                  <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
-                ) : (<span></span>)}
+                <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
               </Button>
+            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center h-screen gap-10 p-20">

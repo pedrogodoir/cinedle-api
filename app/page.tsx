@@ -21,17 +21,13 @@ export default function Home() {
       <div className="flex flex-row justify-center items-center h-screen gap-5">
           <Button variant="red" href="/classic" id="classic" size="box" onMouseEnter={() => setMouseInClassic(true)} onMouseLeave={() => setMouseInClassic(false)}>
             <Title size="lg">Classic</Title>
-            {mouseInClassic ? (
-              <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
-            ) : (<span></span>)}
+            <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
           </Button>
 
           <Button variant="disabled" size="box" onMouseEnter={() => setMouseInArtwork(true)} onMouseLeave={() => setMouseInArtwork(false)}>
             <Title size="lg">Artwork</Title>
-            {mouseInArtwork ? (
-              <Title className="text-left">Coming soon!</Title>
-            ) : (<span></span>)}
-            </Button>
+            <Title className="text-left">Coming soon!</Title>
+          </Button>
       </div>
 
       <div className="absolute inset-0 bg-no-repeat z-[-1]" 

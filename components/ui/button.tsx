@@ -13,7 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({children, className = "", variant = "default", href = "", size = "default", ...props }, ref) => {
     const router = useRouter()
-    const baseStyles = "flex flex-col items-center justify-center rounded-[50px] bg-black"
+    const baseStyles = "flex flex-col rounded-[50px] bg-black"
 
     const variants = {
       default: "bg-gradient-to-b from-zinc-700 to-zinc-50 hover:bg-gradient-to-b hover:from-zinc-50 hover:to-zinc-700",
@@ -24,8 +24,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const sizes = {
       default: "w-96 h-[72px]",
-      box: "max-w-[275px] hover:items-start hover:justify-start p-5 gap-3 transition-[width,height] duration-300",
-      icon: "w-[72px] h-[72px]",
+      box: "w-[275px] h-[250px] items-start justify-start p-5 gap-3",
+      icon: "w-[72px] h-[72px] items-center justify-center",
     }
     
     const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`
