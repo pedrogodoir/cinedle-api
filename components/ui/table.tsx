@@ -74,7 +74,7 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
                 <div className={setColors(rowIndex,3)}>
                   {colors[rowIndex][3] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
                   {colors[rowIndex][3] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
-                  <Title className="absolute max-w-48">${row.revenue}</Title>
+                  <Title className="absolute max-w-48">${row.revenue.toLocaleString()}</Title>
                 </div>
               </div>
 
