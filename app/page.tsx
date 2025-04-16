@@ -18,7 +18,7 @@ export default function Home() {
         <div className="w-[50px]" />
       </Header>
       
-      <div className="flex flex-row justify-center items-center h-screen gap-5">
+      <div className="flex flex-col md:flex-row justify-center items-center h-screen gap-5">
           <Button variant="red" href="/classic" id="classic" size="box" onMouseEnter={() => setMouseInClassic(true)} onMouseLeave={() => setMouseInClassic(false)}>
             <Title size="lg">Classic</Title>
             <Title className="text-left">Try to guess the movie using color-coded hints that show how close you are to the right details!</Title>
@@ -30,7 +30,7 @@ export default function Home() {
           </Button>
       </div>
 
-      <div className="absolute inset-0 bg-no-repeat z-[-1]" 
+      <div className="absolute inset-0 bg-no-repeat z-[-1] hidden md:block" 
         style={{
           backgroundImage: "url('/spotlightl.png')"
         }}/>
