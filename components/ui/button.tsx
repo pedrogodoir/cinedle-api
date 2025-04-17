@@ -25,7 +25,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const sizes = {
       default: "w-96 h-[72px]",
       box: "w-[275px] h-[250px] items-start justify-start p-5 gap-3",
-      icon: "w-[72px] h-[72px] items-center justify-center",
+      icon: "p-2 items-center justify-center",
     }
     
     const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`

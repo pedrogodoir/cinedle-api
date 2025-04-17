@@ -160,7 +160,7 @@ export default function Classic() {
       newTableColors.push("green")
     } else if (movie.revenue > guess.revenue) {
       newTableColors.push("Down")
-    } else if (movie.revenue > guess.revenue) {
+    } else if (movie.revenue < guess.revenue) {
       newTableColors.push("Up")
     } else {
       newTableColors.push("")
@@ -176,9 +176,9 @@ export default function Classic() {
     }
 
 
-    if(yearMovie - yearGuess > 0) {
+    if(yearMovie > yearGuess) {
       newTableColors.push("Down")
-    } else if(yearMovie - yearGuess < 0) {
+    } else if(yearMovie < yearGuess) {
       newTableColors.push("Up")
     } else {
       newTableColors.push("")
@@ -242,7 +242,7 @@ export default function Classic() {
             </Input>
   
             <Button variant="red" size="icon" onClick={() => handleGame(movieId)}>
-              <Search color="white" size={45}></Search>
+              <Search color="white" size={40}></Search>
             </Button>
           </div>
             <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
