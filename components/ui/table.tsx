@@ -10,9 +10,10 @@ interface TableProps {
   colors: string[];
   directors: string[];
   data: Zod.infer<typeof movieDetailsArray>;
+  children?: React.ReactNode;
 }
 
-const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
+const Table: React.FC<TableProps> = ({children, headers, data, colors, directors }) => {
 
   // console.log(colors)
 
@@ -89,6 +90,7 @@ const Table: React.FC<TableProps> = ({ headers, data, colors, directors }) => {
             </div>
           </div>
         ))}
+        {children}
       </div>
 
   );
