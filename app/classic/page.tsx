@@ -193,7 +193,7 @@ export default function Classic() {
       newTableColors.push("")
     }
  
-    if(JSON.stringify(newTableColors) === JSON.stringify(['green', 'green', 'green', 'green', 'green', ''])) {
+    if(JSON.stringify(newTableColors) === JSON.stringify(['green', 'green', 'green', 'green', 'green', 'green', ''])) {
       const jsConfetti = new JSConfetti()
       jsConfetti.addConfetti()
       setHit(1)
