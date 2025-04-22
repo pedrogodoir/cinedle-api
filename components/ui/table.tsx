@@ -9,11 +9,12 @@ interface TableProps {
   headers: string[];
   colors: string[];
   directors: string[];
+  actor: string[];
   data: Zod.infer<typeof movieDetailsArray>;
   children?: React.ReactNode;
 }
 
-const Table: React.FC<TableProps> = ({children, headers, data, colors, directors }) => {
+const Table: React.FC<TableProps> = ({children, headers, data, colors, directors, actor }) => {
 
   // console.log(colors)
 
@@ -63,9 +64,15 @@ const Table: React.FC<TableProps> = ({children, headers, data, colors, directors
                   ))}
                 </div>
               </div>
+
+              <div className='w-52 px-2 bg-black flex justify-center items-center'>
+                <div className={setColors(rowIndex, 2)}>
+                  <Title size='sm'>{actor[rowIndex]}</Title>
+                </div>
+              </div>
   
               <div className='w-52 px-2 bg-black flex justify-center items-center'>
-                <div className={setColors(rowIndex,2)}>
+                <div className={setColors(rowIndex,3)}>
                   {Array.isArray(directors[rowIndex]) && directors[rowIndex].map((director: string, index: number) => (
                     <Title size='sm' key={index}>{director}</Title>
                   ))}
@@ -73,17 +80,17 @@ const Table: React.FC<TableProps> = ({children, headers, data, colors, directors
               </div>
   
               <div className='w-52 px-2 bg-black flex justify-center items-center'>
-                <div className={setColors(rowIndex,3)}>
-                  {colors[rowIndex][3] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
-                  {colors[rowIndex][3] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                <div className={setColors(rowIndex, 4)}>
+                  {colors[rowIndex][4] === "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                  {colors[rowIndex][4] === "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
                   <Title className="absolute max-w-48">${row.revenue.toLocaleString()}</Title>
                 </div>
               </div>
 
               <div className='w-52 px-2 bg-black flex justify-center items-center'>
-                <div className={setColors(rowIndex,4)}>
-                  {colors[rowIndex][5] == "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
-                  {colors[rowIndex][5] == "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                <div className={setColors(rowIndex, 5)}>
+                  {colors[rowIndex][6] == "Up" && <ArrowUp className='opacity-55' color='black' strokeWidth={4} size={120}/>}
+                  {colors[rowIndex][6] == "Down" && <ArrowDown className='opacity-55' color='black' strokeWidth={4} size={120}/>}
                   <Title className="absolute max-w-48">{row.release_date.split("-")[0]}</Title>
                 </div>
               </div>

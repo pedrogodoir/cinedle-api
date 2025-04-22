@@ -13,22 +13,25 @@ import { movieSchema } from "@/lib/schemas/searchMovieSchema";
 import { movieDetailsSchema } from "@/lib/schemas/movieSchema";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import Zod, { number } from "zod";
+import Zod, { number, set } from "zod";
 import { getCredits } from "@/api/getCredits";
 import JSConfetti from 'js-confetti'
 
 export default function Classic() {
   const [guessMovie, setGuessMovie] = useState<Zod.infer<typeof movieDetailsSchema>>();
   const [movieList, setMovieList] = useState<Zod.infer<typeof movieSchema>[]>([]);
+
   const [movieId, setMovieId] = useState<number>(0);
   const [hit, setHit] = useState<number>(0);
+
   const [tableData, setTableData] = useState<any[]>([]);
   const [tableColors, setTableColors] = useState<any[]>([]);
   const [directors, setDirectors] = useState<any[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [mouseInArtwork, setMouseInArtwork] = useState(false);
+  const [actor, setActor] = useState<any[]>([]);
 
-  const headers = [ "Title", "Genres", "Production Companies", "Director(s)", "Revenue", "Release Year"];
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const headers = [ "Title", "Genres", "Production Companies", "Main Actor", "Director(s)", "Revenue", "Release Year"];
 
   useEffect(() => {
     const getGuessMovie = async () => {
@@ -128,8 +131,14 @@ export default function Classic() {
       const responseMovie = await getCredits(movie.id);
       const responseGuess = await getCredits(guess.id);
       
-      let directorGuessLength = 0
+      setActor([responseMovie.cast[0].name, ...actor])
+      if(responseMovie.cast[0].name == responseGuess.cast[0].name) {
+        newTableColors.push("green")
+      } else if(responseMovie.cast[0].name != responseGuess.cast[0].name) {
+        newTableColors.push("red")
+      }
 
+      let directorGuessLength = 0
       setDirectors([responseMovie.crew.filter((member) => member.job === "Director").map((director) => director.name), ...directors])
       for (let i = 0; i < responseMovie.crew.length; i++) {
         if(responseMovie.crew[i].job == "Director") {
@@ -211,7 +220,7 @@ export default function Classic() {
         {hit == 1 ? (
           <div className="flex flex-col items-center h-screen gap-3 p-20">
             <div>
-              <Table headers={headers} data={guessMovie ? [guessMovie] : []} colors={tableColors} directors={directors}>
+              <Table headers={headers} data={guessMovie ? [guessMovie] : []} colors={tableColors} directors={directors} actor={actor}>
                 <div className='w-full bg-zinc-900 h-[2px]'></div>
                 <div className="flex flex-row gap-2">
                   <img src={`https://image.tmdb.org/t/p/w500${guessMovie?.poster_path}`} className="w-96 rounded-xl" alt="" />
@@ -224,7 +233,7 @@ export default function Classic() {
                     <div className="flex flex-col">
                       <Title size="lg" className="text-center">Play too:</Title>
 
-                      <Button variant="blue" href="/artwork" id="classic" onMouseEnter={() => setMouseInArtwork(true)} onMouseLeave={() => setMouseInArtwork(false)}>
+                      <Button variant="blue" href="/artwork" id="classic">
                         <Title size="lg">Artwork</Title>
                       </Button>
                     </div>
@@ -253,7 +262,7 @@ export default function Classic() {
               <Search color="white" size={40}></Search>
             </Button>
           </div>
-            <Table headers={headers} data={tableData} colors={tableColors} directors={directors}></Table>
+            <Table headers={headers} data={tableData} colors={tableColors} directors={directors} actor={actor}></Table>
           </div>
         )}
 
